@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class GetUnitsService { //Obter Unidades
+export class GetUnitsService { 
     readonly apiUrl ="https://test-frontend-developer.s3.amazonaws.com/data/locations.json"; 
 
-  constructor(private httpCliente: HttpClient) { } //construtor para chamadas Http
+  constructor(private httpCliente: HttpClient) {
+    
+   } 
 
-  getAllUnits(): Observable<UnitsResponse>{ //trabalhar com operações assíncronas, como requisições HTTP
+  getAllUnits(): Observable<UnitsResponse>{ 
    return this.httpCliente.get<UnitsResponse>(this.apiUrl);
   }
 }
