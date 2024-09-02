@@ -17,7 +17,6 @@ const OPENING_HOURS = {
     last:'23'
   }  
 }
-
 type HOUR_INDEXES = 'morning' | 'afternoon' | 'night'
 @Component({
   selector: 'app-forms',
@@ -34,65 +33,41 @@ export class FormsComponent implements OnInit {
                ) { }
 
   ngOnInit(): void 
-  {
-     this.formGroup = this.formBuilder.group({
+  {    
+   
+    this.formGroup = this.formBuilder.group({
       hour:'',
-      showClosed: false
+      showClosed: true
     })
-      this.unitService.getAllUnits().subscribe(data => {
-        this.results = data.locations;
-        this.filteredResults = data.locations;        
-    });
-  }
+    this.unitService.getAllUnits().subscribe(data=> {
+      this.results = data.locations;
+      this.filteredResults=data.locations;
+    });     
+  }  
+    filterUnits(unit: Location, opened: boolean, open_hour: string, close_hour: string){
+      let open_hour_filter = parseInt(open_hour,10)
+      let close_hour_filter = parseInt(close_hour,10)
 
-  transformWeekday(weekday: number){
-    switch (weekday) {
-      case 0:
-        return 'Dom.'
-      case 6:
-        return 'Sab.'
-      default:
-        return 'Seg. à Sex.'
+      
     }
-  }
 
-  filterUnits(unit: Location, opened:boolean, open_hour:string, close_hour:string){
-    let open_hour_filter = parseInt(open_hour, 10)
-    let close_hour_filter = parseInt(close_hour, 10)
+    onSubmit(): void
+     {
+      const OPEN_HOUR = OPENING_HOURS[this.formGroup.value.hour as HOUR_INDEXES].first
+      const CLOSE_HOUR = OPENING_HOURS[this.formGroup.value.hour as HOUR_INDEXES].last
 
-    let todays_weekday = this.transformWeekday (new Date().getDay());
-
-    if(opened === true && unit.opened === true)
-
-    for(let i=0; i < unit.schedules.length; i++){
-      let schedules_hour = unit.schedules[i].hour
-      let schedules_weekday = unit.schedules[i].weekdays
-
-      if(todays_weekday === schedules_weekday){
-        if(schedules_hour !== 'fechada'){
-         let [unit_open_hour, unit_close_hour] = schedules_hour.split(' ás ')
-         let unit_open_hour_int = parseInt(unit_open_hour.replace('h', ''),10)
-         let unit_close_hour_int = parseInt(unit_close_hour.replace('h', ''),10)
-
-          if(unit_open_hour_int >= open_hour_filter && unit_close_hour_int >= close_hour_filter) return true
-          else return false  
+        if(!this.formGroup.value.showClosed)
+        {
+          this.filteredResults = this.results.filter(location => location.opened ===true)
+        } else {
+          this.filteredResults = this.results;
         }
-      }
-    }
+     }
+  
+
+   onClean(): void{
+     this.formGroup.reset();
+     }
+    
   }
 
-  onSubmit(): void {
-    const OPEN_HOUR = OPENING_HOURS[this.formGroup.value.hour as HOUR_INDEXES].first
-    const CLOSE_HOUR = OPENING_HOURS[this.formGroup.value.hour as HOUR_INDEXES].last
-
-    if(!this.formGroup.value.showClosed) {
-      this.filteredResults = this.results.filter(location => location.opened ===true )
-      } else {
-        this.filteredResults = this.results;
-      }
-  }
-
-  onClean(): void{
-  this.formGroup.reset();
-  }
-}
