@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Página Principal</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-  <script src='main.js'></script>
-</head>
-<body>
-  <title>Rodrigo dos Santos Castro</title>
-</body>
-</html>
+<div class="app-container">
+    <app-header></app-header>
+    <app-forms (submitEvent)="onSubmit()"></app-forms>
+    <app-card-list *ngIf="(showList | async)" [unitsList]="unitsList"></app-card-list>
+</div>
+
