@@ -11,8 +11,8 @@ Valida e exibe os ícones corretos de acordo com o status da unidade.
 Para executar a aplicação localmente, siga os passos abaixo:
 
 Clone este repositório:
-  git clone 
-  cd smartfit-frontend-challenge
+  git clone https://github.com/Rodrigo-db1/SmartFit.git
+  
 Instale as dependências
   npm install
 Inicie a aplicação
