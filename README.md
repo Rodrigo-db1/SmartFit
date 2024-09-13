@@ -1,5 +1,5 @@
 Funcionalidades
-[x] Carrega unidades através do arquivo JSON locations.json utilizando o método GET. [x] Busca por todas as unidades. [x] Busca por unidades com filtros. [x] Previsão do número de resultados encontrados. [x] Listagem das unidades encontradas após a busca.
+[x] Carrega unidades através do arquivo JSON [locations.json](https://test-frontend-developer.s3.amazonaws.com/data/locations.json) utilizando o método GET. [x] Busca por todas as unidades. [x] Busca por unidades com filtros. [x] Previsão do número de resultados encontrados. [x] Listagem das unidades encontradas após a busca.
 
 Regras de negócio
 Filtra unidades abertas ou fechadas.
